@@ -20,13 +20,12 @@ func Test() {
 }
 
 func init() {
-
 	connect()
-	insertNunber()
+	//insertNunber()
 }
 
 func insertNunber() {
-	collection := Client.Database("testing").Collection("numbers")
+	collection := Client.Database("nc_student").Collection("numbers")
 	ctx, _ := context.WithTimeout(context.Background(), 5*time.Second)
 	res, _ := collection.InsertOne(ctx, bson.M{"name": "pi", "value": 3.14159})
 	id := res.InsertedID
@@ -44,4 +43,17 @@ func connect() {
 	err = client.Ping(ctx, readpref.Primary())
 
 	Client = client
+}
+
+func Connection() (*mongo.Client, error) {
+	client, err := mongo.NewClient(options.Client().ApplyURI(config.Config.Mongo.Uri))
+	if err != nil {
+		log.Fatalf("connect error :%v", err)
+		return nil, err
+	}
+	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
+	err = client.Connect(ctx)
+	ctx, _ = context.WithTimeout(context.Background(), 2*time.Second)
+	err = client.Ping(ctx, readpref.Primary())
+	return client, nil
 }

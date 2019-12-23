@@ -4,7 +4,7 @@ import (
 	"github.com/labstack/echo/v4"
 	"net/http"
 
-	"github.com/nc_student/db"
+	"github.com/hoaxoan/nc_student/db"
 )
 
 func HealthCheck(c echo.Context) error {

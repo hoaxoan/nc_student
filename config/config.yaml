@@ -1,8 +1,9 @@
 MongoDB:
   Uri: "mongodb+srv://mongoadmin:secret1234@cluster0-xxyrd.gcp.mongodb.net"
+  #Uri: "mongodb://mongoadmin:secret1234@localhost:27017/nc_student"
   HostName: "localhost"
-  Username: "user1"
-  Password: "mypass"
+  Username: "mongoadmin"
+  Password: "secret1234"
 
 JWTSeret:
-  JWTEncodeKey: mysecret1234
+  JWTEncodeKey: secret1234
