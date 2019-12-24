@@ -1,8 +1,8 @@
 package user_service
 
 import (
-	"github.com/hoaxoan/nc_student/models"
 	"github.com/dgrijalva/jwt-go"
+	md "github.com/hoaxoan/nc_student/models"
 )
 
 var (
@@ -16,13 +16,13 @@ var (
 // CustomClaims is our custom metadata, which will be hashed
 // and sent as the second segment in our JWT
 type CustomClaims struct {
-	User *User
+	User *md.User
 	jwt.StandardClaims
 }
 
 type Authable interface {
 	Decode(token string) (*CustomClaims, error)
-	Encode(user *User) (string, error)
+	Encode(user *md.User) (string, error)
 }
 
 type TokenService struct {
@@ -46,7 +46,7 @@ func (srv *TokenService) Decode(token string) (*CustomClaims, error) {
 }
 
 // Encode a claim into a JWT
-func (srv *TokenService) Encode(user *User) (string, error) {
+func (srv *TokenService) Encode(user *md.User) (string, error) {
 	// Create the Claims
 	claims := CustomClaims{
 		user,

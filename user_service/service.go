@@ -2,7 +2,7 @@ package user_service
 
 import (
 	"context"
-	"github.com/hoaxoan/nc_student/models"
+	md "github.com/hoaxoan/nc_student/models"
 )
 
 type UserService struct {
@@ -10,7 +10,7 @@ type UserService struct {
 	//tokenService Authable
 }
 
-func (srv *UserService) Get(ctx context.Context, req *User, res *UserResponse) error {
+func (srv *UserService) Get(ctx context.Context, req *md.User, res *md.UserResponse) error {
 	user, err := srv.Repo.Get(req.Id)
 	if err != nil {
 		return err
@@ -19,7 +19,7 @@ func (srv *UserService) Get(ctx context.Context, req *User, res *UserResponse) e
 	return nil
 }
 
-func (srv *UserService) GetAll(ctx context.Context, req *UserRequest, res *UserResponse) error {
+func (srv *UserService) GetAll(ctx context.Context, req *md.UserRequest, res *md.UserResponse) error {
 	users, err := srv.Repo.GetAll()
 	if err != nil {
 		return err

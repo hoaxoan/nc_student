@@ -3,7 +3,7 @@ package user_service
 import (
 	"context"
 
-	"github.com/hoaxoan/nc_student/models"
+	md "github.com/hoaxoan/nc_student/models"
 	"go.mongodb.org/mongo-driver/mongo"
 	"gopkg.in/mgo.v2/bson"
 )
@@ -14,10 +14,10 @@ const (
 )
 
 type Repository interface {
-	GetAll() ([]*User, error)
-	Get(id int) (*User, error)
-	GetByEmail(email string) (User, error)
-	Create(user *User) (interface{}, error)
+	GetAll() ([]*md.User, error)
+	Get(id int) (*md.User, error)
+	GetByEmail(email string) (md.User, error)
+	Create(user *md.User) (interface{}, error)
 }
 
 type UserRepository struct {
@@ -28,8 +28,8 @@ func (repo *UserRepository) collection() *mongo.Collection {
 	return repo.Client.Database(DbName).Collection(ColName)
 }
 
-func (repo *UserRepository) GetAll() ([]*User, error) {
-	var users []*User
+func (repo *UserRepository) GetAll() ([]*md.User, error) {
+	var users []*md.User
 	cur, err := repo.collection().Find(context.TODO(), bson.M{})
 	if err != nil {
 		return nil, err
@@ -41,8 +41,8 @@ func (repo *UserRepository) GetAll() ([]*User, error) {
 	return users, nil
 }
 
-func (repo *UserRepository) Get(id int) (*User, error) {
-	var user *User
+func (repo *UserRepository) Get(id int) (*md.User, error) {
+	var user *md.User
 	user.Id = id
 	filter := bson.M{"id": id}
 	err := repo.collection().FindOne(context.TODO(), filter).Decode(&user)
@@ -52,8 +52,8 @@ func (repo *UserRepository) Get(id int) (*User, error) {
 	return user, nil
 }
 
-func (repo *UserRepository) GetByEmail(email string) (*User, error) {
-	var user *User
+func (repo *UserRepository) GetByEmail(email string) (*md.User, error) {
+	var user *md.User
 	filter := bson.M{"email": email}
 	err := repo.collection().FindOne(context.TODO(), filter).Decode(&user)
 	if err != nil {
@@ -62,7 +62,7 @@ func (repo *UserRepository) GetByEmail(email string) (*User, error) {
 	return user, nil
 }
 
-func (repo *UserRepository) Create(user *User) (interface{}, error) {
+func (repo *UserRepository) Create(user *md.User) (interface{}, error) {
 	cur, err := repo.collection().InsertOne(context.TODO(), user)
 	if err != nil {
 		return nil, err

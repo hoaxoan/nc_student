@@ -2,7 +2,7 @@ package student_service
 
 import (
 	"context"
-	"github.com/hoaxoan/nc_student/models"
+	md "github.com/hoaxoan/nc_student/models"
 )
 
 type StudentService struct {
@@ -10,12 +10,12 @@ type StudentService struct {
 	//tokenService Authable
 }
 
-func (srv *StudentService) Get(ctx context.Context, req *Student, res *StudentResponse) error {
+func (srv *StudentService) Get(ctx context.Context, req *md.Student, res *md.StudentResponse) error {
 	student, err := srv.Repo.Get(req.Id)
 	if err != nil {
 		return err
 	}
-	res.User = student
+	res.Student = student
 	return nil
 }
 
