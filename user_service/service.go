@@ -6,11 +6,11 @@ import (
 )
 
 type UserService struct {
-	Repo Repository
+	Repo *UserRepository
 	//tokenService Authable
 }
 
-func (srv *UserService) Get(ctx context.Context, req *User, res *Response) error {
+func (srv *UserService) Get(ctx context.Context, req *User, res *UserResponse) error {
 	user, err := srv.Repo.Get(req.Id)
 	if err != nil {
 		return err
@@ -19,7 +19,7 @@ func (srv *UserService) Get(ctx context.Context, req *User, res *Response) error
 	return nil
 }
 
-func (srv *UserService) GetAll(ctx context.Context, req *Request, res *Response) error {
+func (srv *UserService) GetAll(ctx context.Context, req *UserRequest, res *UserResponse) error {
 	users, err := srv.Repo.GetAll()
 	if err != nil {
 		return err

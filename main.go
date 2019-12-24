@@ -2,13 +2,13 @@ package main
 
 import (
 	"fmt"
-	"log"
-
 	"github.com/hoaxoan/nc_student/config"
 	db "github.com/hoaxoan/nc_student/db"
+	md "github.com/hoaxoan/nc_student/middleware"
 	us "github.com/hoaxoan/nc_student/user_service"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
+	"log"
 )
 
 func main() {
@@ -16,7 +16,7 @@ func main() {
 
 	e := echo.New()
 	e.Use(middleware.Recover())
-
+	e.Use(md.SingleLogger())
 	client, err := db.Connection()
 	if err != nil {
 		log.Fatalf("Could not connect to DB: %v", err)

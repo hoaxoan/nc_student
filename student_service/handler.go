@@ -12,7 +12,7 @@ func NewStudentHandler(e *echo.Echo, srv *StudentService) {
 	// handler := &StudentHandler{
 	// 	SRV: srv,
 	//}
-	g := e.Group("/api/student/v1/public")
+	//g := e.Group("/api/student/v1/public")
 	//g.GET("/user/login", handler.Login)
 	// e.POST("/v1/public/user/register", handler.Store)
 	// e.PUT("/v1/private/user", handler.GetByID)

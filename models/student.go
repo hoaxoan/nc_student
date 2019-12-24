@@ -7,3 +7,9 @@ type Student struct {
 	Email     string `json:"email,omitempty" bson:"email"`
 	Password  string `json:"password,omitempty" bson:"password`
 }
+
+type StudentResponse struct {
+	Student  *Student   `json"student,omitempty"`
+	Students []*Student `json:"students,omitempty"`
+	Errors   []*Error   `json:"errors,omitempty"`
+}

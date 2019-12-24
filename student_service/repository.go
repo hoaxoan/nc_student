@@ -22,15 +22,13 @@ type StudentRepository struct {
 	Client *mongo.Client
 }
 
-func NewStudentRepository(client *mongo.Client) Repository {
-	return &StudentRepository{
-		Client: client,
-	}
+func (repo *StudentRepository) collection() *mongo.Collection {
+	return repo.Client.Database(DbName).Collection(ColName)
 }
 
 func (repo *StudentRepository) GetAll() ([]*Student, error) {
 	var students []*Student
-	cur, err := repo.Client.Database(DbName).Collection(ColName).Find(context.TODO(), bson.M{})
+	cur, err := repo.collection().Find(context.TODO(), bson.M{})
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +43,7 @@ func (repo *StudentRepository) Get(id int) (*Student, error) {
 	var student *Student
 	student.Id = id
 	filter := bson.M{"id": id}
-	err := repo.Client.Database(DbName).Collection(ColName).FindOne(context.TODO(), filter).Decode(&student)
+	err := repo.collection().FindOne(context.TODO(), filter).Decode(&student)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +51,7 @@ func (repo *StudentRepository) Get(id int) (*Student, error) {
 }
 
 func (repo *StudentRepository) Create(student *Student) (interface{}, error) {
-	cur, err := repo.Client.Database(DbName).Collection(ColName).InsertOne(context.TODO(), student)
+	cur, err := repo.collection().InsertOne(context.TODO(), student)
 	if err != nil {
 		return nil, err
 	}
