@@ -1,6 +1,6 @@
 MongoDB:
-  Uri: "mongodb+srv://mongoadmin:secret1234@cluster0-xxyrd.gcp.mongodb.net"
-  #Uri: "mongodb://mongoadmin:secret1234@localhost:27017/nc_student"
+  #Uri: "mongodb+srv://mongoadmin:secret1234@cluster0-xxyrd.gcp.mongodb.net"
+  Uri: "mongodb://mongoadmin:secret1234@localhost:27017/nc_student"
   HostName: "localhost"
   Username: "mongoadmin"
   Password: "secret1234"

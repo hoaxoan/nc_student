@@ -2,13 +2,14 @@ package main
 
 import (
 	"fmt"
-	"github.com/hoaxoan/nc_student/config"
-	db "github.com/hoaxoan/nc_student/db"
-	md "github.com/hoaxoan/nc_student/middleware"
-	us "github.com/hoaxoan/nc_student/user_service"
+	"log"
+
+	"github.com/hoaxoan/nc_course/nc_student/config"
+	db "github.com/hoaxoan/nc_course/nc_student/db"
+	md "github.com/hoaxoan/nc_student/nc_course/middleware"
+	ss "github.com/hoaxoan/nc_student/nc_course/student"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
-	"log"
 )
 
 func main() {
@@ -22,10 +23,10 @@ func main() {
 		log.Fatalf("Could not connect to DB: %v", err)
 	}
 
-	usRepo := &us.UserRepository{client}
-	srv := &us.UserService{usRepo}
-	us.NewUserHandler(e, srv)
-	//route.All(e)
+	// User
+	ssRepo := &ss.StudentRepository{client}
+	srv := &ss.StudentService{ssRepo}
+	us.NewStudentHandler(e, srv)
 
 	log.Println(e.Start(":9090"))
 }

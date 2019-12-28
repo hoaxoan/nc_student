@@ -1,1 +1,1 @@
-# nc_student
+# nc_course

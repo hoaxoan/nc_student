@@ -1,8 +1,8 @@
-package student_service
+package student
 
 import (
 	"context"
-	md "github.com/hoaxoan/nc_student/models"
+	md "github.com/hoaxoan/nc_course/nc_student/model"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 )

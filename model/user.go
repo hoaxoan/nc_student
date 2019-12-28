@@ -1,4 +1,4 @@
-package models
+package model
 
 import "github.com/dgrijalva/jwt-go"
 
@@ -11,10 +11,10 @@ type User struct {
 	Password  string `json:"password,omitempty" bson:"password"`
 }
 
-type UserClaims struct {
-	UserId int    `json:"id"`
-	Phone  string `json:"p"`
-	Email  string `json:"el"`
+// CustomClaims is our custom metadata, which will be hashed
+// and sent as the second segment in our JWT
+type CustomClaims struct {
+	User *User
 	jwt.StandardClaims
 }
 

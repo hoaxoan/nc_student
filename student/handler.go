@@ -1,19 +1,19 @@
-package student_service
+package student
 
 import (
 	"github.com/labstack/echo/v4"
 )
 
 type StudentHandler struct {
-	SRV *StudentService
+	StudentSrv *StudentService
 }
 
 func NewStudentHandler(e *echo.Echo, srv *StudentService) {
-	// handler := &StudentHandler{
-	// 	SRV: srv,
-	//}
-	//g := e.Group("/api/student/v1/public")
-	//g.GET("/user/login", handler.Login)
+	handler := &StudentHandler{
+		StudentSrv: srv,
+	}
+	g := e.Group("/api/student/v1/public")
+	g.GET("/user/login", handler.Login)
 	// e.POST("/v1/public/user/register", handler.Store)
 	// e.PUT("/v1/private/user", handler.GetByID)
 	// e.PUT("/v1/private/user", handler.Delete)

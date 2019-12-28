@@ -1,13 +1,12 @@
-package student_service
+package student
 
 import (
 	"context"
-	md "github.com/hoaxoan/nc_student/models"
+	md "github.com/hoaxoan/nc_course/nc_student/model"
 )
 
 type StudentService struct {
-	Repo Repository
-	//tokenService Authable
+	Repo *StudentRepository
 }
 
 func (srv *StudentService) Get(ctx context.Context, req *md.Student, res *md.StudentResponse) error {
