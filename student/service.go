@@ -2,7 +2,7 @@ package student
 
 import (
 	"context"
-	md "github.com/hoaxoan/nc_course/nc_student/model"
+	md "github.com/hoaxoan/nc_student/model"
 )
 
 type StudentService struct {

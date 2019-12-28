@@ -1,6 +1,7 @@
 package student
 
 import (
+	"net/http"
 	"github.com/labstack/echo/v4"
 )
 
@@ -19,6 +20,6 @@ func NewStudentHandler(e *echo.Echo, srv *StudentService) {
 	// e.PUT("/v1/private/user", handler.Delete)
 }
 
-// func (a *UserHandler) Login(c echo.Context) error {
-// 	return c.String(http.StatusOK, "OK")
-// }
+func (h *StudentHandler) Login(c echo.Context) error {
+	return c.String(http.StatusOK, "OK")
+}

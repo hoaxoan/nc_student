@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/hoaxoan/nc_course/nc_student/config"
-	db "github.com/hoaxoan/nc_course/nc_student/db"
-	md "github.com/hoaxoan/nc_student/nc_course/middleware"
-	ss "github.com/hoaxoan/nc_student/nc_course/student"
+	"github.com/hoaxoan/nc_student/config"
+	db "github.com/hoaxoan/nc_student/db"
+	md "github.com/hoaxoan/nc_student/middleware"
+	ss "github.com/hoaxoan/nc_student/student"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 )
@@ -26,7 +26,7 @@ func main() {
 	// User
 	ssRepo := &ss.StudentRepository{client}
 	srv := &ss.StudentService{ssRepo}
-	us.NewStudentHandler(e, srv)
+	ss.NewStudentHandler(e, srv)
 
 	log.Println(e.Start(":9090"))
 }
