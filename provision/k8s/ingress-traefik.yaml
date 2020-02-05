@@ -3,6 +3,7 @@ kind: Ingress
 metadata:
   name: student-ingress
   annotations:
+    ingress.kubernetes.io/ssl-redirect: "false"
 spec:
   rules:
     - http:

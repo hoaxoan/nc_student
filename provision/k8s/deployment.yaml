@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nguyendo2008-student
+  name: nguyendo-user
 spec:
   replicas: 1
   selector:
     matchLabels:
-        app: nguyendo2008
+      app: student
   template:
     metadata:
       labels:
-        app: nguyendo2008
+        app: student
     spec:
       containers:
         - name: cont
@@ -18,10 +18,10 @@ spec:
           ports:
             - containerPort: 9090
               name: web
-        resources:
+          resources:
             requests:
-            memory: "50Mi"
-            cpu: "50m"
+              memory: "50Mi"
+              cpu: "50m"
             limits:
-            memory: "75Mi"
-            cpu: "75m"
+              memory: "75Mi"
+              cpu: "75m"

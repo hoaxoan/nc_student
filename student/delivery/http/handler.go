@@ -24,20 +24,21 @@ func NewStudentHandler(e *echo.Echo, uc student.Usecase) {
 }
 
 func PrivateRoute(e *echo.Echo, handler *studentHandler) {
-	//g := e.Group("/v1/private")
+	//g := e.Group("/api/student/v1/private")
 }
 
 func StaffRoute(e *echo.Echo, handler *studentHandler) {
-	g := e.Group("/v1/staff")
+	g := e.Group("/api/student/v1/staff")
 	g.POST("/student", handler.Create)
 	g.PUT("/student", handler.Update)
 	g.DELETE("/student", handler.Delete)
 }
 
 func PublicRoute(e *echo.Echo, handler *studentHandler) {
-	g := e.Group("/v1/public")
+	g := e.Group("/api/student/v1/public")
 	g.GET("/student", handler.GetAll)
 	g.PATCH("/student", handler.Search)
+	//g.GET("/student/id/5", handler.GetById)
 	g.PATCH("/health", handler.Health)
 }
 
@@ -61,13 +62,13 @@ func (h *studentHandler) GetAll(ctx echo.Context) error {
 }
 
 func (h *studentHandler) Search(ctx echo.Context) error {
-	var req model.StudentRequest
+	var req model.Student
 	if err := ctx.Bind(&req); err != nil {
 		return ctx.JSON(http.StatusBadRequest, model.Error{Code: http.StatusBadRequest, Description: "bad request"})
 	}
 
 	var res model.StudentResponse
-	err := h.SUcase.GetAll(ctx.Request().Context(), &req, &res)
+	err := h.SUcase.Get(ctx.Request().Context(), &req, &res)
 	if err != nil {
 		return ctx.JSON(http.StatusBadRequest, model.Error{Code: http.StatusBadRequest, Description: "bad request"})
 	}
