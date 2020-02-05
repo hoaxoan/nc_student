@@ -69,7 +69,7 @@ func (repo *studentRepository) Update(student *model.Student) error {
 
 func (repo *studentRepository) Delete(student *model.Student) error {
 	filter := bson.M{"id": student.Id}
-	_, err := repo.collection().UpdateOne(context.TODO(), filter, bson.M{"$set": student})
+	_, err := repo.collection().DeleteOne(context.TODO(), filter)
 	if err != nil {
 		return err
 	}
