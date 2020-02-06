@@ -38,7 +38,6 @@ func PublicRoute(e *echo.Echo, handler *studentHandler) {
 	g := e.Group("/api/student/v1/public")
 	g.GET("/student", handler.GetAll)
 	g.PATCH("/student", handler.Search)
-	//g.GET("/student/id/5", handler.GetById)
 	g.PATCH("/health", handler.Health)
 }
 
@@ -62,13 +61,13 @@ func (h *studentHandler) GetAll(ctx echo.Context) error {
 }
 
 func (h *studentHandler) Search(ctx echo.Context) error {
-	var req model.Student
+	var req model.StudentRequest
 	if err := ctx.Bind(&req); err != nil {
 		return ctx.JSON(http.StatusBadRequest, model.Error{Code: http.StatusBadRequest, Description: "bad request"})
 	}
 
 	var res model.StudentResponse
-	err := h.SUcase.Get(ctx.Request().Context(), &req, &res)
+	err := h.SUcase.GetAll(ctx.Request().Context(), &req, &res)
 	if err != nil {
 		return ctx.JSON(http.StatusBadRequest, model.Error{Code: http.StatusBadRequest, Description: "bad request"})
 	}

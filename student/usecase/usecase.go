@@ -27,7 +27,7 @@ func (scase *studentUsecase) Get(ctx context.Context, req *model.Student, res *m
 }
 
 func (scase *studentUsecase) GetAll(ctx context.Context, req *model.StudentRequest, res *model.StudentResponse) error {
-	students, err := scase.Repo.GetAll()
+	students, err := scase.Repo.GetAll(req)
 	if err != nil {
 		return err
 	}

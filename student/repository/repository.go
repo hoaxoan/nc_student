@@ -26,9 +26,35 @@ func (repo *studentRepository) collection() *mongo.Collection {
 	return repo.Client.Database(DbName).Collection(ColName)
 }
 
-func (repo *studentRepository) GetAll() ([]*model.Student, error) {
+func (repo *studentRepository) GetAll(req *model.StudentRequest) ([]*model.Student, error) {
+
+	filter := bson.M{}
+	if req.Id != 0 {
+		filter["id"] = req.Id
+	}
+
+	if req.LastName != "" {
+		filter["last_name"] = req.LastName
+	}
+
+	if req.FirstName != "" {
+		filter["first_name"] = req.FirstName
+	}
+
+	if req.ClassName != "" {
+		filter["email"] = req.Email
+	}
+
+	if req.ClassName != "" {
+		filter["class_name"] = req.ClassName
+	}
+
+	if req.Age != 0 {
+		filter["age"] = req.Age
+	}
+
 	var students []*model.Student
-	cur, err := repo.collection().Find(context.TODO(), bson.M{})
+	cur, err := repo.collection().Find(context.TODO(), filter)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +85,7 @@ func (repo *studentRepository) Create(student *model.Student) error {
 }
 
 func (repo *studentRepository) Update(student *model.Student) error {
-	filter := bson.M{"id": student.Id}
+	filter := bson.M{"email": student.Email}
 	_, err := repo.collection().UpdateOne(context.TODO(), filter, bson.M{"$set": student})
 	if err != nil {
 		return err

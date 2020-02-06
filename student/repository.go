@@ -5,7 +5,7 @@ import (
 )
 
 type Repository interface {
-	GetAll() ([]*model.Student, error)
+	GetAll(req *model.StudentRequest) ([]*model.Student, error)
 	Get(id int) (*model.Student, error)
 	Create(student *model.Student) error
 	Update(student *model.Student) error
